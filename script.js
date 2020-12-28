@@ -44,3 +44,9 @@
 // JSON.stringify
 // JSON.parse
 
+//Functions needed
+//getTime() : gets current time
+//compareTime(time slot) : compares time with time slot
+//cellHighlighter() : highlight cells based on time
+//saveToLocal() : on save button click save associated entry to local storage
+//getFromLocal() : on load grab data from local storage
