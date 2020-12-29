@@ -1,4 +1,17 @@
 
+$(document).ready(function (event) {
+  
+  $(".saveBtn").on("click", function () {
+    alert("I've been clicked!");
+  });
+
+  $("#save1").on("click", function () {
+    alert("Poop");
+    console.log(this);
+  });
+
+});
+
 
 
 
