@@ -4,11 +4,11 @@ var array = ["", "", "", "", "", "", "", "", ""];
 $(document).ready(function () {
 
   loadEvents();
-  
+  console.log(localStorage)
   //DEBUG
   var now = moment();
-  console.log(now);
-	console.log($("#currentDay"));
+  // console.log(now);
+	// console.log($("#currentDay"));
 	var date = moment().format("dddd, MMMM Do");
 	var time = moment().format("LT");
 	console.log(date);
@@ -48,18 +48,18 @@ $(document).ready(function () {
 
   function loadEvents() {
 
-    if (JSON.parse(localStorage.getItem("events")) === "undefined") {
+    if (localStorage.length === 0) {
 
-      //DEBUG
+  //     //DEBUG
       console.log("events = null" )
     } else {
       var storedEvents = JSON.parse(localStorage.getItem("events"));
 
-      //DEBUG
+  //     //DEBUG
       console.log("Elements: " + storedEvents);
 
       $(".container .row").each(function () {
-        var this_row = $(this).find(".description");
+        //var this_row = $(this).find(".description");
         $(this).find(".description").text(storedEvents[$(this).attr("data-index")]);
         //DEBUG
         // console.log(this_row);
