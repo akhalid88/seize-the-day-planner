@@ -1,18 +1,54 @@
+var timeBlock = document.querySelector(".time-block");
+var dateEl = document.querySelector("#currentDay");
 
-$(document).ready(function (event) {
-  
-  $(".saveBtn").on("click", function () {
-    alert("I've been clicked!");
+var array = ["", "", "", "", "", "", "", "", ""];
+
+$(document).ready(function () {
+
+	loadEvents();
+	
+  $(".container .row").on("click", function(event) {
+    event.preventDefault();
+    
+    var element = event.target;
+
+    if(element.matches("button") === true) {
+      console.log("Data-Index: " + element.parentElement.getAttribute("data-index"));
+      console.log("Sibling: " + $(element).siblings(".description").val());
+      array[element.parentElement.getAttribute("data-index")] = $(element).siblings(".description").val();
+
+      console.log(array);
+      saveEvent();
+    }
   });
 
-  $("#save1").on("click", function () {
-    alert("Poop");
-    console.log(this);
-  });
+  function saveEvent() {
+    localStorage.setItem("events", JSON.stringify(array));
+  }
+
+  function loadEvents() {
+    var storedEvents = JSON.parse(localStorage.getItem("events"));
+		console.log("Elements: " + storedEvents);
+    for (var i = 0; i < storedEvents.length; i++) {
+			$(".description").text(storedEvents[i]);
+			console.log(i);
+		}
+
+  }
+
 
 });
 
+// console.log("Element: " + element);
+// console.log("Data-Index: " + element.parentElement.getAttribute("data-index"));
 
+
+//Functions needed
+//getTime() : gets current time
+//compareTime(time slot) : compares time with time slot
+//cellHighlighter() : highlight cells based on time
+//saveToLocal() : on save button click save associated entry to local storage
+//getFromLocal() : on load grab data from local storage
 
 
 // User Story
@@ -57,9 +93,4 @@ $(document).ready(function (event) {
 // JSON.stringify
 // JSON.parse
 
-//Functions needed
-//getTime() : gets current time
-//compareTime(time slot) : compares time with time slot
-//cellHighlighter() : highlight cells based on time
-//saveToLocal() : on save button click save associated entry to local storage
-//getFromLocal() : on load grab data from local storage
+
