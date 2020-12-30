@@ -4,11 +4,31 @@ var array = ["", "", "", "", "", "", "", "", ""];
 $(document).ready(function () {
 
   loadEvents();
+  
+  //DEBUG
+  var now = moment();
+  console.log(now);
+	console.log($("#currentDay"));
+	var date = moment().format("dddd, MMMM Do");
+	var time = moment().format("LT");
+	console.log(date);
+
+	$("#currentDay").text(date + " " + time);
 
   $(".container .row").on("click", function (event) {
     event.preventDefault();
 
+    //DEBUG
+    //console.log("This: " + $(this).attr("class"));
+    // if($(this).filter("button:last-of-type")) {
+    //   console.log("YAS");
+    //   console.log($(this).filter("button:last-of-type"));
+    // } else { ( console.log("NAH"));}
+
+
     var element = event.target;
+
+    
 
     if (element.matches("button") === true) {
       //DEBUG
@@ -29,10 +49,12 @@ $(document).ready(function () {
   function loadEvents() {
 
     if (JSON.parse(localStorage.getItem("events")) === "undefined") {
+
       //DEBUG
       console.log("events = null" )
     } else {
       var storedEvents = JSON.parse(localStorage.getItem("events"));
+
       //DEBUG
       console.log("Elements: " + storedEvents);
 
@@ -104,5 +126,24 @@ $(document).ready(function () {
 // save to localStorage
 // JSON.stringify
 // JSON.parse
+
+
+//Unix timestamps for comparison
+// 09:00 = 1609261200
+// 10:00 = 1609264800
+// 11:00 = 1609268400
+// 12:00 = 1609272000
+// 01:00 = 1609275600
+// 02:00 = 1609279200
+// 03:00 = 1609282800
+// 04:00 = 1609286400
+// 05:00 = 1609290000
+
+
+
+
+
+
+
 
 
