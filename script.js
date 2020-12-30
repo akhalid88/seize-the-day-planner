@@ -1,23 +1,23 @@
-var timeBlock = document.querySelector(".time-block");
-var dateEl = document.querySelector("#currentDay");
-
 var array = ["", "", "", "", "", "", "", "", ""];
+//"", "", "", "", "", "", "", "", ""
 
 $(document).ready(function () {
 
-	loadEvents();
-	
-  $(".container .row").on("click", function(event) {
+  loadEvents();
+
+  $(".container .row").on("click", function (event) {
     event.preventDefault();
-    
+
     var element = event.target;
 
-    if(element.matches("button") === true) {
-      console.log("Data-Index: " + element.parentElement.getAttribute("data-index"));
-      console.log("Sibling: " + $(element).siblings(".description").val());
+    if (element.matches("button") === true) {
+      //DEBUG
+      // console.log("Data-Index: " + element.parentElement.getAttribute("data-index"));
+      // console.log("Sibling: " + $(element).siblings(".description").val());
       array[element.parentElement.getAttribute("data-index")] = $(element).siblings(".description").val();
 
-      console.log(array);
+      //DEBUG
+      // console.log(array);
       saveEvent();
     }
   });
@@ -27,15 +27,27 @@ $(document).ready(function () {
   }
 
   function loadEvents() {
-    var storedEvents = JSON.parse(localStorage.getItem("events"));
-		console.log("Elements: " + storedEvents);
-    for (var i = 0; i < storedEvents.length; i++) {
-			$(".description").text(storedEvents[i]);
-			console.log(i);
-		}
+
+    if (JSON.parse(localStorage.getItem("events")) === "undefined") {
+      //DEBUG
+      console.log("events = null" )
+    } else {
+      var storedEvents = JSON.parse(localStorage.getItem("events"));
+      //DEBUG
+      console.log("Elements: " + storedEvents);
+
+      $(".container .row").each(function () {
+        var this_row = $(this).find(".description");
+        $(this).find(".description").text(storedEvents[$(this).attr("data-index")]);
+        //DEBUG
+        // console.log(this_row);
+      });
+
+      //returnrs storedEvents to array to be used outside of function
+      array = storedEvents;
+    }
 
   }
-
 
 });
 
