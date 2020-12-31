@@ -2,18 +2,32 @@ var array = ["", "", "", "", "", "", "", "", ""];
 
 $(document).ready(function () {
 
-  loadEvents();
-
-  //DEBUG
-  var now = moment();
-  // console.log(now);
-  // console.log($("#currentDay"));
-  
+  var hour = moment().format("HH");
   var date = moment().format("dddd, MMMM Do");
   var time = moment().format("LT");
-  console.log("Date: " + date);
+
+  loadEvents();
+  highlighter();
+
+  console.log("24 hour time: " + hour);
 
   $("#currentDay").text(date + " " + time);
+
+  function highlighter() {
+
+    $(".container .row").each(function () {
+      
+      console.log($(this).children().first().attr("data-time"));
+      
+      var asdf = $(this).children().first().attr("data-time");
+      
+      console.log("DEBUG: " + asdf);
+
+          if (hour > $(".row").find(".hour")) {
+        console.log("HELP ME");
+      }
+    })
+  }
 
   function saveEvent() {
     localStorage.setItem("events", JSON.stringify(array));
@@ -23,13 +37,12 @@ $(document).ready(function () {
   }
 
   function loadEvents() {
-
     if (localStorage.length === 0) {
       //DEBUG
       console.log("events = null")
     } else {
       var storedEvents = JSON.parse(localStorage.getItem("events"));
-      
+
       // DEBUG
       console.log("Events to load: " + storedEvents);
 
@@ -41,7 +54,6 @@ $(document).ready(function () {
       //returns storedEvents to array to be used outside of function
       array = storedEvents;
     }
-
   }
 
   $(".container .row").on("click", function (event) {
@@ -112,6 +124,7 @@ $(document).ready(function () {
 
 
 //Unix timestamps for comparison
+1609393092216
 // 09:00 = 1609261200
 // 10:00 = 1609264800
 // 11:00 = 1609268400
@@ -121,12 +134,3 @@ $(document).ready(function () {
 // 03:00 = 1609282800
 // 04:00 = 1609286400
 // 05:00 = 1609290000
-
-
-
-
-
-
-
-
-
