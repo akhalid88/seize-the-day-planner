@@ -35,7 +35,7 @@ $(document).ready(function () {
 
   function loadEvents() {
 		if (localStorage.length === 0) {
-			//Error handling; don't attempt JSON parsing
+			//Error handling; don't attempt JSON parsing if localStorage is empty
 			console.log("events = null")
     } else {
 			//Proceed with parsing and loading events
