@@ -67,6 +67,19 @@ For comparing the time each timeblock uses data-time attribute with its respecti
 var time = moment().format("HH");
 ```
 
+To control the button selection, we perform the on click function at the container-row level, then using an if statement only take action if the element clicked matches html button element. 
+
+Each block has a data-index indicating its position in the array, so we access the array at that data-index position and we search the element for a description class that is tied to its text area and grab the value, assigning it to the array at the position of the data-index.
+
+```
+$(".container .row").on("click", function (event) {
+  ...
+  if (element.matches("button") === true) {
+    array[element.parentElement.getAttribute("data-index")] = $(element).siblings(".description").val();
+    saveEvent();
+  }
+});
+```
 
 -----------------------
 ## Prerequisites

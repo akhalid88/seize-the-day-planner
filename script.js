@@ -1,5 +1,5 @@
 var array = [];
-// "", "", "", "", "", "", "", "", ""
+
 $(document).ready(function () {
 
   //for header tag
