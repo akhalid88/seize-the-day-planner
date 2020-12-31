@@ -1,37 +1,45 @@
-var array = ["", "", "", "", "", "", "", "", ""];
-
+var array = [];
+// "", "", "", "", "", "", "", "", ""
 $(document).ready(function () {
 
-  var hour = moment().format("HH");
+  var time = moment().format("HH");
   var date = moment().format("dddd, MMMM Do");
-  var time = moment().format("LT");
+  //var time = moment().format("LT");
 
   loadEvents();
   highlighter();
 
-  console.log("24 hour time: " + hour);
-
-  $("#currentDay").text(date + " " + time);
+  $("#currentDay").text(date);
 
   function highlighter() {
 
     $(".container .row").each(function () {
-      
-      console.log($(this).children().first().attr("data-time"));
-      
-      var asdf = $(this).children().first().attr("data-time");
-      
-      console.log("DEBUG: " + asdf);
+	
+			// console.log("24 hour time: " + time);
+			var hour = $(this).children().first().attr("data-time");
+      var block = $(this).children().first().siblings();
+			//console.log("DEBUG: " + hour);
+			// siblings().addClass("present"));
 
-          if (hour > $(".row").find(".hour")) {
-        console.log("HELP ME");
+      if (time == hour) {
+				block.addClass("present");
+				//console.log("Living in the moment " + time + " is " + hour);
+		 
+			} else if (time < hour) {
+				block.addClass("future");
+				//console.log("Welcome to the future " + hour + " is greater than " + time);
+			
+			} else {
+				block.addClass("past");
+				//console.log("Days gone by " + hour + " is less than " + time);
       }
+
     })
   }
 
   function saveEvent() {
     localStorage.setItem("events", JSON.stringify(array));
-
+		highlighter();
     //DEBUG
     console.log("Events to save: " + array)
   }
