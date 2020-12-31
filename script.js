@@ -1,4 +1,4 @@
-var array = [];
+var array = ["", "", "", "", "", "", "", "", ""];
 
 $(document).ready(function () {
 
