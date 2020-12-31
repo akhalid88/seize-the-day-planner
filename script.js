@@ -1,76 +1,59 @@
 var array = ["", "", "", "", "", "", "", "", ""];
-//"", "", "", "", "", "", "", "", ""
 
 $(document).ready(function () {
 
   loadEvents();
-  console.log(localStorage)
+
   //DEBUG
   var now = moment();
   // console.log(now);
-	// console.log($("#currentDay"));
-	var date = moment().format("dddd, MMMM Do");
-	var time = moment().format("LT");
-	console.log(date);
+  // console.log($("#currentDay"));
+  
+  var date = moment().format("dddd, MMMM Do");
+  var time = moment().format("LT");
+  console.log("Date: " + date);
 
-	$("#currentDay").text(date + " " + time);
-
-  $(".container .row").on("click", function (event) {
-    event.preventDefault();
-
-    //DEBUG
-    //console.log("This: " + $(this).attr("class"));
-    // if($(this).filter("button:last-of-type")) {
-    //   console.log("YAS");
-    //   console.log($(this).filter("button:last-of-type"));
-    // } else { ( console.log("NAH"));}
-
-
-    var element = event.target;
-
-    
-
-    if (element.matches("button") === true) {
-      //DEBUG
-      // console.log("Data-Index: " + element.parentElement.getAttribute("data-index"));
-      // console.log("Sibling: " + $(element).siblings(".description").val());
-      array[element.parentElement.getAttribute("data-index")] = $(element).siblings(".description").val();
-
-      //DEBUG
-      // console.log(array);
-      saveEvent();
-    }
-  });
+  $("#currentDay").text(date + " " + time);
 
   function saveEvent() {
     localStorage.setItem("events", JSON.stringify(array));
+
+    //DEBUG
+    console.log("Events to save: " + array)
   }
 
   function loadEvents() {
 
     if (localStorage.length === 0) {
-
-  //     //DEBUG
-      console.log("events = null" )
+      //DEBUG
+      console.log("events = null")
     } else {
       var storedEvents = JSON.parse(localStorage.getItem("events"));
+      
+      // DEBUG
+      console.log("Events to load: " + storedEvents);
 
-  //     //DEBUG
-      console.log("Elements: " + storedEvents);
-
+      //loop through all rows withing main container div
       $(".container .row").each(function () {
-        //var this_row = $(this).find(".description");
         $(this).find(".description").text(storedEvents[$(this).attr("data-index")]);
-        //DEBUG
-        // console.log(this_row);
       });
 
-      //returnrs storedEvents to array to be used outside of function
+      //returns storedEvents to array to be used outside of function
       array = storedEvents;
     }
 
   }
 
+  $(".container .row").on("click", function (event) {
+    event.preventDefault();
+    var element = event.target;
+
+    //only take action if a button is pressed
+    if (element.matches("button") === true) {
+      array[element.parentElement.getAttribute("data-index")] = $(element).siblings(".description").val();
+      saveEvent();
+    }
+  });
 });
 
 // console.log("Element: " + element);

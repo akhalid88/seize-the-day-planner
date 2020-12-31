@@ -34,6 +34,17 @@ https://akhalid88.github.io/seize-the-day-planner/
 -----------------------
 ## Code Snippet
 
+In the loadEvents function I was initally parsing the localStorage for validation before loading the saved text into their respective elements. If there was no data in localStorage, jQuery would throw and error message. I was able to fix this by using the updated comparison below.  
+
+NEW CODE::
+```
+if (localStorage.length === 0){...}
+```
+
+OLD CODE::
+```
+if (JSON.parse(localStorage.getItem("events")) === "undefined") {...}    
+```
 
 -----------------------
 ## Prerequisites
